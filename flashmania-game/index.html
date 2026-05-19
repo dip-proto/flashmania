@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flashmania TypeScript</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero" aria-labelledby="title">
+        <p class="eyebrow">Solo physics time trial</p>
+        <h1 id="title">Flashmania</h1>
+        <p class="lede">
+          Chase milliseconds across asphalt, dirt, ice, grass, plastic, boosters,
+          engine-off coasts, fragile sections, and airborne jumps.
+        </p>
+      </section>
+
+      <section class="game-card" aria-label="Flashmania game">
+        <canvas id="game" width="1280" height="760" aria-label="Top-down racing canvas"></canvas>
+        <div class="hud" aria-live="polite">
+          <div><span>Time</span><strong id="time">00.000</strong></div>
+          <div><span>Best</span><strong id="best">--</strong></div>
+          <div><span>Medal</span><strong id="medal">--</strong></div>
+          <div><span>Speed</span><strong id="speed">0 km/h</strong></div>
+          <div><span>Surface</span><strong id="surface">asphalt</strong></div>
+          <div><span>Checkpoint</span><strong id="checkpoint">0/5</strong></div>
+        </div>
+      </section>
+
+      <aside class="controls" aria-label="Controls and status">
+        <div>
+          <h2>Controls</h2>
+          <p>Arrow keys or WASD steer and drive. Brake in mid-air to nose-dive. Space resets to the last checkpoint. R restarts. G toggles the best ghost.</p>
+        </div>
+        <div>
+          <h2>Objective</h2>
+          <p>Run the point-to-point course as fast as possible. Medal targets: bronze 65s, silver 54s, gold 45s, author 39s.</p>
+        </div>
+        <div>
+          <h2>Status</h2>
+          <p id="status">Press any driving key to start audio and begin.</p>
+        </div>
+      </aside>
+    </main>
+
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
