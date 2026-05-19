@@ -1,0 +1,36 @@
+export declare class Game {
+    private physics;
+    private renderer;
+    private audio;
+    private input;
+    private track;
+    private car;
+    private gameState;
+    private lastTime;
+    private animationId;
+    private uiTimer;
+    private uiSpeed;
+    private uiSurface;
+    private medalDisplay;
+    private checkpointFlash;
+    constructor(canvas: HTMLCanvasElement);
+    private init;
+    private createInitialCarState;
+    private startRace;
+    private restart;
+    private gameLoop;
+    private update;
+    private updateTrackInteraction;
+    private getCurrentBlock;
+    private isCarInBlock;
+    private checkCollisions;
+    private checkpointsPassed;
+    private passCheckpoint;
+    private showCheckpointFlash;
+    private finishRace;
+    private updateMedal;
+    private showMedal;
+    private updateCarHaptics;
+    private formatTime;
+    private render;
+}

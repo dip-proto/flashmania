@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flashmania</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #1a1a2e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      overflow: hidden;
+    }
+    #game-container {
+      position: relative;
+    }
+    canvas {
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 0 40px rgba(0, 200, 255, 0.3);
+    }
+    #ui {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: #fff;
+      font-size: 18px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      pointer-events: none;
+    }
+    #ui .time {
+      font-size: 32px;
+      font-weight: bold;
+      color: #00ffcc;
+      font-family: 'Courier New', monospace;
+    }
+    #ui .speed {
+      font-size: 24px;
+      color: #ff6b6b;
+      margin-top: 8px;
+    }
+    #ui .surface {
+      font-size: 16px;
+      color: #ffd93d;
+      margin-top: 8px;
+    }
+    #medal-display {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 64px;
+      opacity: 0;
+      transition: opacity 0.5s;
+      text-shadow: 0 0 20px currentColor;
+      pointer-events: none;
+    }
+    #medal-display.show {
+      opacity: 1;
+    }
+    #instructions {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+      pointer-events: none;
+    }
+    #checkpoint-flash {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 215, 0, 0.3);
+      opacity: 0;
+      pointer-events: none;
+      border-radius: 8px;
+      transition: opacity 0.1s;
+    }
+    #checkpoint-flash.active {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="game"></canvas>
+    <div id="ui">
+      <div id="timer" class="time">0:00.000</div>
+      <div id="speed" class="speed">0 km/h</div>
+      <div id="surface" class="surface">Road</div>
+    </div>
+    <div id="medal-display">🥇</div>
+    <div id="checkpoint-flash"></div>
+    <div id="instructions">
+      Arrow Keys / WASD: Steer & Accelerate | Space: Brake | R: Restart | M: Mute
+    </div>
+  </div>
+  <script type="module" src="./dist/main.js"></script>
+</body>
+</html>
