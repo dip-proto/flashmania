@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flashmania</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Segoe UI', Arial, sans-serif; }
+    #game-container { width: 100%; height: 100%; position: relative; }
+    canvas { display: block; width: 100%; height: 100%; }
+
+    /* HUD */
+    #hud {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; user-select: none;
+    }
+    #timer {
+      position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+      font-size: 32px; font-weight: bold; color: #fff;
+      text-shadow: 0 0 8px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.6);
+      font-variant-numeric: tabular-nums;
+    }
+    #speed-display {
+      position: absolute; bottom: 24px; right: 24px;
+      font-size: 24px; font-weight: bold; color: #fff;
+      text-shadow: 0 0 8px rgba(0,0,0,0.8);
+    }
+    #surface-display {
+      position: absolute; bottom: 56px; right: 24px;
+      font-size: 16px; color: #ccc;
+      text-shadow: 0 0 8px rgba(0,0,0,0.8);
+      text-transform: uppercase; letter-spacing: 2px;
+    }
+    #status-display {
+      position: absolute; top: 56px; left: 50%; transform: translateX(-50%);
+      font-size: 14px; color: #ff4;
+      text-shadow: 0 0 8px rgba(0,0,0,0.8);
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    #checkpoints-display {
+      position: absolute; top: 16px; right: 24px;
+      font-size: 16px; color: #fff;
+      text-shadow: 0 0 8px rgba(0,0,0,0.8);
+    }
+
+    /* Medal overlay */
+    #medal-overlay {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      text-align: center; display: none;
+    }
+    #medal-overlay .medal-label {
+      font-size: 20px; color: #fff; margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0,0,0,0.9);
+    }
+    #medal-overlay .medal-icon {
+      font-size: 72px; margin-bottom: 12px;
+    }
+    #medal-overlay .best-time {
+      font-size: 18px; color: #ccc;
+      text-shadow: 0 0 10px rgba(0,0,0,0.9);
+    }
+    #medal-overlay .medal-times {
+      font-size: 13px; color: #aaa; margin-top: 8px;
+      text-shadow: 0 0 10px rgba(0,0,0,0.9);
+    }
+
+    /* Menu */
+    #menu {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.7); pointer-events: auto;
+    }
+    #menu h1 {
+      font-size: 64px; color: #ff6600; margin-bottom: 8px;
+      text-shadow: 0 0 20px rgba(255,102,0,0.5);
+      letter-spacing: 4px;
+    }
+    #menu .subtitle {
+      font-size: 16px; color: #aaa; margin-bottom: 32px;
+    }
+    #menu button {
+      pointer-events: auto; cursor: pointer;
+      background: linear-gradient(135deg, #ff6600, #ff3300);
+      border: none; color: #fff; font-size: 20px; font-weight: bold;
+      padding: 14px 48px; border-radius: 8px; margin: 6px;
+      text-transform: uppercase; letter-spacing: 2px;
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+    #menu button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255,102,0,0.6);
+    }
+    #menu .controls {
+      margin-top: 24px; font-size: 13px; color: #888; text-align: center; line-height: 1.8;
+    }
+
+    /* Countdown */
+    #countdown {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      font-size: 120px; font-weight: bold; color: #fff; display: none;
+      text-shadow: 0 0 30px rgba(255,255,255,0.5);
+    }
+
+    /* Minimap */
+    #minimap {
+      position: absolute; top: 16px; left: 16px;
+      width: 160px; height: 160px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 8px; background: rgba(0,0,0,0.5);
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/index-xav9MRvq.js"></script>
+</head>
+<body>
+  <div id="game-container">
+    <div id="hud">
+      <div id="timer">00:00.000</div>
+      <div id="speed-display">0 km/h</div>
+      <div id="surface-display">ASPHALT</div>
+      <div id="status-display"></div>
+      <div id="checkpoints-display"></div>
+      <canvas id="minimap"></canvas>
+      <div id="countdown"></div>
+      <div id="medal-overlay">
+        <div class="medal-label"></div>
+        <div class="medal-icon"></div>
+        <div class="best-time"></div>
+        <div class="medal-times"></div>
+      </div>
+    </div>
+    <div id="menu">
+      <h1>FLASHMANIA</h1>
+      <div class="subtitle">Time Trial Racing</div>
+      <button id="btn-start">Start Race</button>
+      <button id="btn-restart">Restart</button>
+      <div class="controls">
+        <strong>Controls</strong><br>
+        Arrow Keys / WASD — Steer &amp; Accelerate<br>
+        Space — Brake / Air Control<br>
+        R — Restart
+      </div>
+    </div>
+  </div>
+</body>
+</html>
