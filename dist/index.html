@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flashmania</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #1a1a2e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+    }
+    #game-container {
+      position: relative;
+      width: 960px;
+      height: 640px;
+      background: #16213e;
+      border: 2px solid #0f3460;
+      border-radius: 8px;
+      box-shadow: 0 0 40px rgba(15, 52, 96, 0.5);
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    #ui-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      color: #e94560;
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/index-CFsmlq5i.js"></script>
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="game-canvas" width="960" height="640"></canvas>
+    <div id="ui-overlay"></div>
+  </div>
+</body>
+</html>
