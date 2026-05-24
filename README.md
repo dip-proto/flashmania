@@ -26,6 +26,7 @@ Each branch below is an independent attempt at the same task. Check them out and
 - [`qwen3.6-27b`](https://github.com/dip-proto/flashmania/tree/qwen3.6-27b) — Qwen 3.6 27B
 - [`minimax`](https://github.com/dip-proto/flashmania/tree/minimax) — MiniMax M2.7
 - [`mimo`](https://github.com/dip-proto/flashmania/tree/mimo) — MiMo v2.5 Pro
+- [`qwopus`](https://github.com/dip-proto/flashmania/tree/qwopus) — Qwopus 3.6 27B v2
 
 ## Screenshots
 
